@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 5f;
-    public Transform groundcheck;
-    public LayerMask groundlayer;
+    public float moveSpeed = 5f;                   //캐릭터 이동속도를 조절   
+    public float jumpForce = 5f;                   //캐릭터 점프힘 조절
+    public Transform groundcheck;                  //캐릭터가 땅에 닿았는지 확인
+    public LayerMask groundlayer;                  //땅의 레이러를 나타냄    
 
-    private Rigidbody rb;
+    public int itemget = 0;
+
+    private Rigidbody2D rb;
     private bool isGrounded;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -26,7 +30,20 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space) )
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Respawn"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex );
+        }
+        if (collision.CompareTag("Item"))
+        {
+            itemget++;
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            Destroy(collision.gameObject);
         }
     }
 }
