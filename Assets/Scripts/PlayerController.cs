@@ -28,9 +28,17 @@ public class PlayerController : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundlayer);
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space) )
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            if (isGrounded)
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+            else if(itemget >0)
+            {
+                itemget -= 1;
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,8 +50,11 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Item"))
         {
             itemget++;
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             Destroy(collision.gameObject);
+        }
+        if (collision.CompareTag("Finish"))
+        {
+            collision.GetComponent<LevelObject>().MovetoNextLevel();
         }
     }
 }
