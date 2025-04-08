@@ -56,5 +56,9 @@ public class PlayerController : MonoBehaviour
         {
             collision.GetComponent<LevelObject>().MovetoNextLevel();
         }
+        if (collision.CompareTag("Enemy"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
