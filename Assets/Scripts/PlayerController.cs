@@ -14,17 +14,25 @@ public class PlayerController : MonoBehaviour
     public int itemget = 0;
 
     private Rigidbody2D rb;
+    private Animator pAni;
     private bool isGrounded;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        pAni = GetComponent<Animator>();
     }
 
     private void Update()
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+
+        if (moveInput < 0)
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+
+        if (moveInput > 0)
+            transform.localScale = new Vector3(1f, 1f, 1f);
 
         isGrounded = Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundlayer);
 
@@ -33,6 +41,7 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                pAni.SetTrigger("JumpAction");
             }
             else if(itemget >0)
             {
