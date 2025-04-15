@@ -7,6 +7,12 @@ TagManager:
   - Item
   - Boundary
   - Enemy
+  - Ladder
+  - Platform
+  - Death
+  - Ground
+  - Jump
+  - ColdItem
   layers:
   - Default
   - TransparentFX

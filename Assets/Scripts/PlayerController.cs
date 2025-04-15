@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator pAni;
     private bool isGrounded;
+    private bool Cold;
 
     private void Awake()
     {
@@ -43,10 +42,11 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 pAni.SetTrigger("JumpAction");
             }
-            else if(itemget >0)
+            else if (itemget > 0)
             {
                 itemget -= 1;
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                pAni.SetTrigger("JumpAction");
             }
         }
     }
@@ -54,12 +54,24 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Respawn"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex );
+            if (Cold)
+            {
+
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
         if (collision.CompareTag("Item"))
         {
             itemget++;
             Destroy(collision.gameObject);
+        }
+        if (collision.CompareTag("ColdItem"))
+        {
+            Destroy(collision.gameObject);
+            Cold = true;
         }
         if (collision.CompareTag("Finish"))
         {
@@ -68,6 +80,20 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (collision.CompareTag("Death"))
+        {
+            jumpForce = 9f;
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpForce = 5f;
+            pAni.SetTrigger("JumpAction");
+        }
+        if (collision.CompareTag("Jump"))
+        {
+            jumpForce = 10f;
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpForce = 5f;
+            pAni.SetTrigger("JumpAction");
         }
     }
 }

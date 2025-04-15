@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float moveSpeed = 3f;
+    public float jumpForce = 3f;
     private Rigidbody2D rb;
     private bool isMovingRight = true;
 
@@ -26,6 +27,10 @@ public class EnemyController : MonoBehaviour
         if (collision.CompareTag("Boundary"))
         {
             isMovingRight = !isMovingRight;
+        }
+        if(collision.CompareTag("Player"))
+        {
+            Destroy(gameObject);
         }
     }
 }
