@@ -13,6 +13,7 @@ TagManager:
   - Ground
   - Jump
   - ColdItem
+  - SpeedItem
   layers:
   - Default
   - TransparentFX

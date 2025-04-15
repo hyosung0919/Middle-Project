@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,12 +29,21 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
         if (moveInput < 0)
+        {
+            pAni.SetBool("RunAction",true);
             transform.localScale = new Vector3(-1f, 1f, 1f);
-
+        }
         if (moveInput > 0)
+        {
+            pAni.SetBool("RunAction2", true);
             transform.localScale = new Vector3(1f, 1f, 1f);
-
-        isGrounded = Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundlayer);
+        }
+        else
+        {
+            pAni.SetBool("RunAction", false);
+            pAni.SetBool("RunAction2", false);
+        }
+            isGrounded = Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundlayer);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -73,7 +83,12 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             Cold = true;
         }
-        if (collision.CompareTag("Finish"))
+        if (collision.CompareTag("SpeedItem"))
+        {
+            Destroy(collision.gameObject);
+            moveSpeed = 10f;
+        }
+            if (collision.CompareTag("Finish"))
         {
             collision.GetComponent<LevelObject>().MovetoNextLevel();
         }
