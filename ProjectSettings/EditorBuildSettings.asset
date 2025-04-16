@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage_3.unity
     guid: b8e34e67d57cc4f4586ced4ccb58f794
+  - enabled: 1
+    path: Assets/Scenes/DeadScene.unity
+    guid: 7ef2020d1408e104ab43592d86544079
   m_configObjects: {}

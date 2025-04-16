@@ -30,18 +30,11 @@ public class PlayerController : MonoBehaviour
 
         if (moveInput < 0)
         {
-            pAni.SetBool("RunAction",true);
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         if (moveInput > 0)
         {
-            pAni.SetBool("RunAction2", true);
             transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        else
-        {
-            pAni.SetBool("RunAction", false);
-            pAni.SetBool("RunAction2", false);
         }
             isGrounded = Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundlayer);
 
@@ -62,7 +55,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Respawn"))
+        if (collision.CompareTag("Dead"))
         {
             if (Cold)
             {
@@ -70,7 +63,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene("DeadScene");
             }
         }
         if (collision.CompareTag("Item"))

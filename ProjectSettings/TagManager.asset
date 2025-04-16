@@ -14,6 +14,7 @@ TagManager:
   - Jump
   - ColdItem
   - SpeedItem
+  - Dead
   layers:
   - Default
   - TransparentFX
