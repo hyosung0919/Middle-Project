@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+
         if (isMovingRight)
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         else
@@ -26,11 +27,19 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.CompareTag("Boundary"))
         {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
             isMovingRight = !isMovingRight;
         }
-        if(collision.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            if (collision.CompareTag("Boundary2"))
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                isMovingRight = !isMovingRight;
+            }
+            if (collision.CompareTag("Player"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
