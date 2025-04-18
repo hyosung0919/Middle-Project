@@ -15,6 +15,7 @@ TagManager:
   - SpeedItem
   - Dead
   - Boundary2
+  - JumpItem
   layers:
   - Default
   - TransparentFX

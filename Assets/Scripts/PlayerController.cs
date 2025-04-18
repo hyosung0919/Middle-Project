@@ -82,9 +82,14 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("SpeedItem"))
         {
             Destroy(collision.gameObject);
-            moveSpeed = 10f;
+            moveSpeed = 5f;
         }
-        if (collision.CompareTag("Finish"))
+        if (collision.CompareTag("JumpItem"))
+        {
+            Destroy(collision.gameObject);
+            jumpForce = 7f;
+        }
+            if (collision.CompareTag("Finish"))
         {
             collision.GetComponent<LevelObject>().MovetoNextLevel();
         }
