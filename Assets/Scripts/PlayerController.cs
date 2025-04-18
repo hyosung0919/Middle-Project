@@ -1,4 +1,6 @@
 using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
-            isGrounded = Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundlayer);
+        isGrounded = Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundlayer);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             moveSpeed = 10f;
         }
-            if (collision.CompareTag("Finish"))
+        if (collision.CompareTag("Finish"))
         {
             collision.GetComponent<LevelObject>().MovetoNextLevel();
         }

@@ -761,6 +761,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   itemget: 0
+  level: 5
+  health: 100
 --- !u!50 &4610169355544767993
 Rigidbody2D:
   serializedVersion: 4
