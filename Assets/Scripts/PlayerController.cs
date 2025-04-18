@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 5f;                   //캐릭터 점프힘 조절
     public Transform groundcheck;                  //캐릭터가 땅에 닿았는지 확인
     public LayerMask groundlayer;                  //땅의 레이러를 나타냄    
-
+    public float fallSpeed = 0f;
     public int itemget = 0;
 
     private Rigidbody2D rb;
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Cold)
             {
-
+                
             }
             else
             {
@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Cold = true;
+            Invoke("Wait5sec", 5f);
         }
         if (collision.CompareTag("SpeedItem"))
         {
@@ -101,5 +102,9 @@ public class PlayerController : MonoBehaviour
             jumpForce = 5f;
             pAni.SetTrigger("JumpAction");
         }
+    }
+    void Wait5sec()
+    {
+        Cold = false;
     }
 }

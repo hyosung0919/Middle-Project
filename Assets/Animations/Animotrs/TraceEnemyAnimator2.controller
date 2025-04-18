@@ -14,7 +14,7 @@ AnimatorStateMachine:
     m_Position: {x: 380, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3832981183579095522}
-    m_Position: {x: 160, y: 160, z: 0}
+    m_Position: {x: 230, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9029944543060181803}
     m_Position: {x: 510, y: 140, z: 0}
@@ -34,7 +34,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TraceEnemyAnimator
+  m_Name: TraceEnemyAnimator2
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -93,7 +93,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 68ead271a0515274980bd0564ec41deb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3cee90cfe295f1043ba8c9ea6b5cb8db, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -120,7 +120,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 13c6e017b1687da43ab91c2062937f5c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 117bcba60fc326d4f8edc0e0cf56c7c6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -169,7 +169,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b2cd7eb2fd8511c49b52c46712ce0c4b, type: 2}
+  m_Motion: {fileID: 7400000, guid: cb8e91fc252094f49b7cec5ac1c6dcee, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

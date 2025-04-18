@@ -9,9 +9,9 @@ public class BackgroundMove2 : MonoBehaviour
         float moveInput = Input.GetAxisRaw("Horizontal");
 
         if (moveInput < 0)
-            transform.localScale = new Vector3(-0.3122735f, 0.2517831f, 0.3178861f);
+            transform.localScale = new Vector3(-0.31417f, 0.30289f, 0.31789f);
 
         if (moveInput > 0)
-            transform.localScale = new Vector3(0.3122735f, 0.2517831f, 0.3178861f);
+            transform.localScale = new Vector3(0.31417f, 0.30289f, 0.31789f);
     }
 }
