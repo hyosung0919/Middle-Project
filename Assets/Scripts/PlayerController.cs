@@ -33,11 +33,18 @@ public class PlayerController : MonoBehaviour
         if (moveInput < 0)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
+            pAni.SetBool("RunAction",true);
         }
-        if (moveInput > 0)
+        else if (moveInput > 0)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+            pAni.SetBool("RunAction",true);
         }
+        else
+        {
+            pAni.SetBool("RunAction", false);
+        }
+        
         isGrounded = Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundlayer);
 
         if (Input.GetKeyDown(KeyCode.Space))

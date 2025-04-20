@@ -1,83 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public float moveSpeed = 2f;
-    public float attackRange = 5f;
-    public float attackCooldown = 2f;
-    public int maxHealth = 100;
+    public float moveSpeed = 0.5f;
+    public float traceDistance = 2f;
 
-    private int currentHealth;
     private Transform player;
-    private float lastAttackTime;
 
-    private Animator animator;
-
-    void Start()
+    private void Start()
     {
-        currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        animator = GetComponent<Animator>();
     }
-
     void Update()
     {
-        if (player == null) return;
+        if (player != null) return;
 
-        float distance = Vector3.Distance(transform.position, player.position);
+        float distance = Vector2.Distance(transform.position, player.position);
+        if (distance > traceDistance)
+            return;
 
-        if (distance > attackRange)
+        Vector2 direction = new Vector2(player.position.x - transform.position.x, 0f).normalized;
+
+        transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+        if ( direction.x != 0)
         {
-            MoveTowardsPlayer();
+            Vector3 localScale = transform.localScale;
+            localScale.x = Mathf.Sign(direction.x) * Mathf.Abs(localScale.x);
+            transform.localScale = localScale;
         }
-        else
-        {
-            Attack();
-        }
-    }
-
-    void MoveTowardsPlayer()
-    {
-        animator.SetBool("isMoving", true);
-        Vector3 direction = (player.position - transform.position).normalized;
-        transform.position += direction * moveSpeed * Time.deltaTime;
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-    }
-
-    void Attack()
-    {
-        animator.SetBool("isMoving", false);
-
-        if (Time.time - lastAttackTime >= attackCooldown)
-        {
-            lastAttackTime = Time.time;
-
-            // 공격 애니메이션 트리거
-            animator.SetTrigger("attack");
-
-            // 여기에서 플레이어에게 데미지를 주는 로직을 연결
-            Debug.Log("Boss attacks!");
-        }
-    }
-
-    public void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        Debug.Log("Boss took damage! Current health: " + currentHealth);
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        animator.SetTrigger("die");
-        Debug.Log("Boss defeated!");
-        // 죽은 후 행동
-        Destroy(gameObject, 2f);
     }
 }
