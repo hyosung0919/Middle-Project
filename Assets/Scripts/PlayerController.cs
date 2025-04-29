@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 
 public class PlayerController : MonoBehaviour
@@ -18,10 +19,13 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool Cold;
 
+    float score;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         pAni = GetComponent<Animator>();
+
+        score = 10000f;
     }
 
     private void Update()
@@ -60,6 +64,8 @@ public class PlayerController : MonoBehaviour
                 pAni.SetTrigger("JumpAction");
             }
         }
+
+        score -= Time.deltaTime*10; 
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -97,6 +103,7 @@ public class PlayerController : MonoBehaviour
         }
             if (collision.CompareTag("Finish"))
         {
+            HighScore.TrySet(SceneManager.GetActiveScene().buildIndex, (int)score);
             collision.GetComponent<LevelObject>().MovetoNextLevel();
         }
         if (collision.CompareTag("Death"))
